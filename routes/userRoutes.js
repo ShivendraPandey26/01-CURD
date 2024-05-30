@@ -1,28 +1,23 @@
 import { Router } from "express";
-import user from "../models/user.schema.js";
+import {
+  handleGetReq,
+  handlePostReq,
+  handleGetReqById,
+  handleDeleteReq,
+  handlePatchReq,
+} from "../controllers/userController.js";
 
 const router = Router();
 
-router.post("/", async (req, res) => {
-  try {
-    const { name, email } = req.body;
-    const result = await user.create({
-      Name: name,
-      Email: email,
-    });
-    res.send({ message: "success", user: result });
-  } catch (error) {
-    res.status(500).send({ message: "Error creating user", error });
-  }
-});
+router
+.route("/")
+.post(handlePostReq)
+.get(handleGetReq);
 
-router.get("/", async (req, res) => {
-  try {
-    const result = await user.find({});
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching users", error });
-  }
-});
+router
+.route("/:id")
+.get(handleGetReqById)
+.delete(handleDeleteReq)
+.patch(handlePatchReq);
 
 export default router;
