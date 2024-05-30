@@ -8,6 +8,7 @@ const PORT = 8000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Connect to the database
 connectionDB("mongodb://127.0.0.1:27017/userContacts");
