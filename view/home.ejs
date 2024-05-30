@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Form</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
+      form {
+        margin-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <form id="myForm">
+        <div>
+          <label for="name">Name:</label><br />
+          <input type="text" id="name" name="name" required /><br />
+        </div>
+        <div>
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" required /><br />
+        </div>
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("myForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+
+          if (name.length < 3) {
+            alert("Name must be at least 3 characters long.");
+            return;
+          }
+
+          if (!email.includes("@")) {
+            alert("Email must be a valid email address.");
+            return;
+          }
+
+          console.log(`Name: ${name}  Email: ${email}`);
+        });
+    </script>
+  </body>
+</html>
